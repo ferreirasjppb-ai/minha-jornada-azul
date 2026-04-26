@@ -1,0 +1,4 @@
+# requirements.txt
+# Para instalar tudo: pip install -r requirements.txt
+
+flask==3.0.3

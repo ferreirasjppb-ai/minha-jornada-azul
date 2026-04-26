@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Minha Jornada Azul{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}" class="logo">
+                Minha <span>Jornada</span> Azul 💙
+            </a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Início</a></li>
+                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+                <li><a href="{{ url_for('forum') }}">Fórum</a></li>
+                <li><a href="{{ url_for('novo_post') }}" class="btn btn-primario" style="padding: 0.4rem 1rem; font-size: 0.85rem;">+ Novo Post</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>💙 Minha Jornada Azul — Um espaço seguro para histórias reais</p>
+        <p style="margin-top: 0.3rem; font-size: 0.78rem;">Todos os relatos são anônimos e respeitosos</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!-- forum.html — Lista de tópicos do fórum -->
+{% extends 'base.html' %}
+{% block title %}Fórum — Minha Jornada Azul{% endblock %}
+{% block conteudo %}
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+    <div>
+        <h1 style="font-family: 'Lora', serif; color: var(--azul-escuro);">💬 Fórum</h1>
+        <p style="color: var(--texto-suave);">Espaço aberto para conversa, dúvidas e troca de experiências.</p>
+    </div>
+    <a href="{{ url_for('novo_topico') }}" class="btn btn-primario">+ Novo tópico</a>
+</div>
+
+{% if topicos %}
+    {% for t in topicos %}
+    <div class="topico-card">
+        <a href="{{ url_for('ver_topico', topico_id=t['id']) }}">
+            <h3>{{ t['titulo'] }}</h3>
+        </a>
+        <p class="topico-info">
+            por <strong>{{ t['pseudonimo'] }}</strong> · {{ t['data_criacao'] }}
+        </p>
+        <p style="font-size: 0.9rem; color: var(--texto-suave); margin-top: 0.4rem;">
+            {{ t['conteudo'][:100] }}{% if t['conteudo']|length > 100 %}...{% endif %}
+        </p>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="vazio">
+        <p>Nenhum tópico ainda. Inicie a primeira conversa! 💙</p>
+        <br>
+        <a href="{{ url_for('novo_topico') }}" class="btn btn-primario">Criar tópico</a>
+    </div>
+{% endif %}
+
+{% endblock %}

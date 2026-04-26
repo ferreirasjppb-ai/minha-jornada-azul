@@ -1,0 +1,48 @@
+<!-- novo_post.html — Formulário para escrever um post -->
+{% extends 'base.html' %}
+{% block title %}Novo Post — Minha Jornada Azul{% endblock %}
+{% block conteudo %}
+
+<div class="formulario">
+    <h1>✍️ Compartilhe sua história</h1>
+    <p style="color: var(--texto-suave); margin-bottom: 1.5rem;">
+        Escreva com liberdade. Seu relato pode ajudar outras pessoas a se sentirem menos sozinhas.
+    </p>
+
+    <!-- method="POST" envia os dados para o servidor -->
+    <form action="{{ url_for('novo_post') }}" method="POST">
+
+        <div class="campo">
+            <label for="titulo">Título do post</label>
+            <input type="text" id="titulo" name="titulo"
+                   placeholder="Ex: Quando tudo finalmente fez sentido..." required maxlength="120">
+        </div>
+
+        <div class="campo">
+            <label for="categoria">Categoria</label>
+            <select id="categoria" name="categoria" required>
+                <option value="">Selecione uma categoria...</option>
+                <option value="Diagnóstico Tardio">Diagnóstico Tardio</option>
+                <option value="Cotidiano">Cotidiano</option>
+                <option value="Relacionamentos">Relacionamentos</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Sentimentos">Sentimentos</option>
+                <option value="Dicas">Dicas</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="conteudo">Seu relato</label>
+            <textarea id="conteudo" name="conteudo"
+                      style="min-height: 280px;"
+                      placeholder="Escreva sua história aqui. Não há tamanho mínimo ou máximo — escreva o quanto precisar." required></textarea>
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-primario">Publicar história 💙</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secundario">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+<!-- novo_topico.html — Formulário para criar tópico no fórum -->
+{% extends 'base.html' %}
+{% block title %}Novo Tópico — Fórum{% endblock %}
+{% block conteudo %}
+
+<div class="formulario">
+    <h1>💬 Iniciar novo tópico</h1>
+    <p style="color: var(--texto-suave); margin-bottom: 1.5rem;">
+        Faça uma pergunta, compartilhe uma reflexão ou proponha uma discussão.
+    </p>
+
+    <form action="{{ url_for('novo_topico') }}" method="POST">
+        <div class="campo">
+            <label for="pseudonimo">Seu pseudônimo</label>
+            <input type="text" id="pseudonimo" name="pseudonimo"
+                   placeholder="Ex: VentoCalmante, LuzDoAlba..." required maxlength="50">
+        </div>
+        <div class="campo">
+            <label for="titulo">Título do tópico</label>
+            <input type="text" id="titulo" name="titulo"
+                   placeholder="Sobre o que você quer conversar?" required maxlength="120">
+        </div>
+        <div class="campo">
+            <label for="conteudo">Descreva melhor</label>
+            <textarea id="conteudo" name="conteudo"
+                      placeholder="Explique com mais detalhes sua pergunta ou reflexão..." required></textarea>
+        </div>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-primario">Publicar tópico 💙</button>
+            <a href="{{ url_for('forum') }}" class="btn btn-secundario">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

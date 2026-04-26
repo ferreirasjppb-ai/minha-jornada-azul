@@ -1,0 +1,59 @@
+<!-- post.html — Página de post completo com comentários -->
+{% extends 'base.html' %}
+{% block title %}{{ post['titulo'] }} — Minha Jornada Azul{% endblock %}
+{% block conteudo %}
+
+<!-- Botão voltar -->
+<p style="margin-bottom: 1rem;">
+    <a href="{{ url_for('index') }}" style="color: var(--texto-suave); font-size: 0.9rem;">
+        ← Voltar para o início
+    </a>
+</p>
+
+<!-- POST COMPLETO -->
+<div class="post-completo">
+    <span class="card-categoria">{{ post['categoria'] }}</span>
+    <h1>{{ post['titulo'] }}</h1>
+    <p class="post-meta">📅 Publicado em {{ post['data_criacao'] }}</p>
+    <div class="post-conteudo">{{ post['conteudo'] }}</div>
+</div>
+
+<!-- SEÇÃO DE COMENTÁRIOS -->
+<div class="secao-comentarios">
+    <h2>💬 Comentários ({{ comentarios|length }})</h2>
+
+    {% if comentarios %}
+        {% for c in comentarios %}
+        <div class="comentario">
+            <span class="comentario-autor">{{ c['pseudonimo'] }}</span>
+            <span class="comentario-data">· {{ c['data_criacao'] }}</span>
+            <p class="comentario-texto">{{ c['texto'] }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="vazio" style="padding: 1rem;">Seja a primeira pessoa a comentar! 💙</p>
+    {% endif %}
+
+    <!-- Formulário para novo comentário -->
+    <hr style="border: none; border-top: 1px solid var(--azul-medio); margin: 1.5rem 0;">
+    <h3 style="font-family: 'Lora', serif; margin-bottom: 1rem; color: var(--azul-escuro);">
+        Deixe seu comentário
+    </h3>
+
+    <!-- action envia para a rota /comentar/ID do post -->
+    <form action="{{ url_for('comentar', post_id=post['id']) }}" method="POST">
+        <div class="campo">
+            <label for="pseudonimo">Seu pseudônimo (nome anônimo)</label>
+            <input type="text" id="pseudonimo" name="pseudonimo"
+                   placeholder="Ex: Borboleta Azul, EstrelaCadente..." required maxlength="50">
+        </div>
+        <div class="campo">
+            <label for="texto">Seu comentário</label>
+            <textarea id="texto" name="texto"
+                      placeholder="Escreva com respeito e empatia..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primario">Publicar comentário</button>
+    </form>
+</div>
+
+{% endblock %}

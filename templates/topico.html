@@ -1,0 +1,57 @@
+<!-- topico.html — Visualização de um tópico do fórum com respostas -->
+{% extends 'base.html' %}
+{% block title %}{{ topico['titulo'] }} — Fórum{% endblock %}
+{% block conteudo %}
+
+<p style="margin-bottom: 1rem;">
+    <a href="{{ url_for('forum') }}" style="color: var(--texto-suave); font-size: 0.9rem;">
+        ← Voltar ao fórum
+    </a>
+</p>
+
+<!-- Tópico principal -->
+<div class="post-completo">
+    <h1>{{ topico['titulo'] }}</h1>
+    <p class="post-meta">
+        por <strong>{{ topico['pseudonimo'] }}</strong> · {{ topico['data_criacao'] }}
+    </p>
+    <div class="post-conteudo">{{ topico['conteudo'] }}</div>
+</div>
+
+<!-- Respostas -->
+<div class="secao-comentarios">
+    <h2>💬 Respostas ({{ respostas|length }})</h2>
+
+    {% if respostas %}
+        {% for r in respostas %}
+        <div class="comentario">
+            <span class="comentario-autor">{{ r['pseudonimo'] }}</span>
+            <span class="comentario-data">· {{ r['data_criacao'] }}</span>
+            <p class="comentario-texto">{{ r['texto'] }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="vazio" style="padding: 1rem;">Seja a primeira a responder! 💙</p>
+    {% endif %}
+
+    <hr style="border: none; border-top: 1px solid var(--azul-medio); margin: 1.5rem 0;">
+    <h3 style="font-family: 'Lora', serif; margin-bottom: 1rem; color: var(--azul-escuro);">
+        Escrever resposta
+    </h3>
+
+    <form action="{{ url_for('responder_topico', topico_id=topico['id']) }}" method="POST">
+        <div class="campo">
+            <label for="pseudonimo">Seu pseudônimo</label>
+            <input type="text" id="pseudonimo" name="pseudonimo"
+                   placeholder="Ex: Oceano Calmo..." required maxlength="50">
+        </div>
+        <div class="campo">
+            <label for="texto">Sua resposta</label>
+            <textarea id="texto" name="texto"
+                      placeholder="Responda com empatia e respeito..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primario">Enviar resposta</button>
+    </form>
+</div>
+
+{% endblock %}
