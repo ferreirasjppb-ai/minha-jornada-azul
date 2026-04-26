@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Login — Minha Jornada Azul{% endblock %}
+{% block conteudo %}
+
+<div style="max-width: 400px; margin: 3rem auto;">
+    <div class="formulario">
+        <h1 style="text-align: center;">🔐 Área dos Autores</h1>
+        <p style="color: var(--texto-suave); text-align: center; margin-bottom: 1.5rem;">
+            Acesso exclusivo para Aurora e Sírius
+        </p>
+
+        {% if erro %}
+        <div style="background: #fee; border: 1px solid #fcc; border-radius: 8px; padding: 0.8rem 1rem; margin-bottom: 1rem; color: #c00;">
+            ⚠️ {{ erro }}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="campo">
+                <label for="usuario">Usuário</label>
+                <input type="text" id="usuario" name="usuario"
+                       placeholder="Aurora ou Sirius" required>
+            </div>
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha"
+                       placeholder="••••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primario" style="width: 100%;">
+                Entrar 💙
+            </button>
+        </form>
+
+        <p style="text-align: center; margin-top: 1rem;">
+            <a href="{{ url_for('index') }}" style="color: var(--texto-suave); font-size: 0.9rem;">
+                ← Voltar ao blog
+            </a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

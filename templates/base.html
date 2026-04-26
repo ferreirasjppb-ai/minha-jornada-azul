@@ -17,7 +17,16 @@
                 <li><a href="{{ url_for('index') }}">Início</a></li>
                 <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
                 <li><a href="{{ url_for('forum') }}">Fórum</a></li>
-                <li><a href="{{ url_for('novo_post') }}" class="btn btn-primario" style="padding: 0.4rem 1rem; font-size: 0.85rem;">+ Novo Post</a></li>
+
+                {% if admin %}
+                    <li><a href="{{ url_for('novo_post') }}" class="btn btn-primario" style="padding: 0.4rem 1rem; font-size: 0.85rem;">+ Novo Post</a></li>
+                    <li style="display:flex; align-items:center; gap:0.5rem;">
+                        <span style="font-size:0.85rem; color: var(--azul-escuro);">👤 {{ usuario }}</span>
+                        <a href="{{ url_for('logout') }}" style="font-size:0.82rem; color: var(--texto-suave);">Sair</a>
+                    </li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}" class="btn btn-primario" style="padding: 0.4rem 1rem; font-size: 0.85rem;">🔐 Admin</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
