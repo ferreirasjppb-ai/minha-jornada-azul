@@ -159,12 +159,10 @@ def ver_topico(topico_id):
 
 @app.route('/forum/novo', methods=['GET', 'POST'])
 def novo_topico():
-    if not admin_logado():
-        return redirect(url_for('login'))
     if request.method == 'POST':
         titulo = request.form['titulo']
         conteudo = request.form['conteudo']
-        pseudonimo = session['usuario']
+        pseudonimo = request.form['pseudonimo']
         data = datetime.now().strftime('%d/%m/%Y às %H:%M')
         conn = get_db()
         conn.execute(

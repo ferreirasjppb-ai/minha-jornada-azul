@@ -4,43 +4,19 @@
 
 {% block conteudo %}
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; gap: 1rem; flex-wrap: wrap;">
-
-    <div style="text-align: center; flex: 1; min-width: 140px;">
-        <img src="{{ url_for('static', filename='caricatura_Aurora.jpg') }}"
-             alt="Aurora"
-             style="width: 130px; height: 130px; border-radius: 50%; border: 3px solid var(--azul-medio); object-fit: cover; box-shadow: 0 4px 12px var(--sombra);">
-        <p style="margin-top: 0.6rem; font-weight: 600; color: var(--azul-escuro); font-size: 1rem;">Aurora</p>
-        <p style="font-size: 0.85rem; color: var(--texto-suave);">Autora anônima 💙</p>
-    </div>
-
-    <div style="text-align: center; flex: 2; min-width: 200px;">
-        <p style="font-family: 'Lora', serif; font-size: 1.1rem; color: var(--azul-escuro); font-style: italic;">
-            "Duas vozes, uma jornada.<br>Histórias reais sobre o espectro autista."
-        </p>
-    </div>
-
-    <div style="text-align: center; flex: 1; min-width: 140px;">
-        <img src="{{ url_for('static', filename='caricatura_Sírius.jpg') }}"
-             alt="Sírius"
-             style="width: 130px; height: 130px; border-radius: 50%; border: 3px solid var(--azul-medio); object-fit: cover; box-shadow: 0 4px 12px var(--sombra);">
-        <p style="margin-top: 0.6rem; font-weight: 600; color: var(--azul-escuro); font-size: 1rem;">Sírius</p>
-        <p style="font-size: 0.85rem; color: var(--texto-suave);">Autor anônimo 💙</p>
-    </div>
-
-</div>
-
+<!-- Banner de boas-vindas -->
 <div class="hero">
     <h1>Um espaço para vozes reais 💙</h1>
     <p>
         Aqui compartilhamos experiências, sentimentos e descobertas sobre a vida no espectro autista.
-        Todos os relatos são anônimos. Você não está sozinha.
+        Todos os relatos são anônimos. Você não está sozinha(o).
     </p>
     <a href="{{ url_for('novo_post') }}" class="btn btn-primario">Compartilhar minha história</a>
     &nbsp;
     <a href="{{ url_for('forum') }}" class="btn btn-secundario">Entrar no fórum</a>
 </div>
 
+<!-- Filtros por categoria -->
 <div style="margin-bottom: 1.5rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
     <a href="{{ url_for('index') }}" class="btn btn-secundario" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Todos</a>
     {% for cat in ['Diagnóstico Tardio', 'Cotidiano', 'Relacionamentos', 'Trabalho', 'Sentimentos', 'Dicas'] %}
@@ -50,6 +26,7 @@
     {% endfor %}
 </div>
 
+<!-- Título da seção -->
 {% if categoria_atual is defined and categoria_atual %}
     <h2 style="font-family: 'Lora', serif; color: var(--azul-escuro); margin-bottom: 1.2rem;">
         Categoria: {{ categoria_atual }}
@@ -60,6 +37,7 @@
     </h2>
 {% endif %}
 
+<!-- Grade de posts -->
 {% if posts %}
     <div class="grid-posts">
         {% for post in posts %}
@@ -70,6 +48,7 @@
                     {{ post['titulo'] }}
                 </a>
             </h2>
+            <!-- Mostra só os primeiros 120 caracteres do conteúdo -->
             <p>{{ post['conteudo'][:120] }}{% if post['conteudo']|length > 120 %}...{% endif %}</p>
             <span class="card-data">📅 {{ post['data_criacao'] }}</span>
         </div>
