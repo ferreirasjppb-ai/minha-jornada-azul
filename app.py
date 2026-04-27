@@ -60,6 +60,9 @@ def init_db():
     conn.commit()
     conn.close()
 
+# Inicia o banco de dados sempre que o app iniciar
+init_db()
+
 def admin_logado():
     return 'usuario' in session
 
