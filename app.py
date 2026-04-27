@@ -120,13 +120,11 @@ def comentar(post_id):
 
 @app.route('/novo-post', methods=['GET', 'POST'])
 def novo_post():
-    if not admin_logado():
-        return redirect(url_for('login'))
     if request.method == 'POST':
         titulo = request.form['titulo']
         conteudo = request.form['conteudo']
         categoria = request.form['categoria']
-        autor = session['usuario']
+        autor = request.form.get('pseudonimo', 'Anônimo')
         data = datetime.now().strftime('%d/%m/%Y às %H:%M')
         conn = get_db()
         conn.execute(

@@ -1,4 +1,3 @@
-<!-- novo_post.html — Formulário para escrever um post -->
 {% extends 'base.html' %}
 {% block title %}Novo Post — Minha Jornada Azul{% endblock %}
 {% block conteudo %}
@@ -9,8 +8,15 @@
         Escreva com liberdade. Seu relato pode ajudar outras pessoas a se sentirem menos sozinhas.
     </p>
 
-    <!-- method="POST" envia os dados para o servidor -->
     <form action="{{ url_for('novo_post') }}" method="POST">
+
+        <div class="campo">
+            <label for="pseudonimo">Seu pseudônimo (nome anônimo)</label>
+            <input type="text" id="pseudonimo" name="pseudonimo"
+                   placeholder="Ex: Borboleta Azul, EstrelaCadente..."
+                   value="{{ usuario if usuario else '' }}"
+                   required maxlength="50">
+        </div>
 
         <div class="campo">
             <label for="titulo">Título do post</label>
@@ -35,7 +41,7 @@
             <label for="conteudo">Seu relato</label>
             <textarea id="conteudo" name="conteudo"
                       style="min-height: 280px;"
-                      placeholder="Escreva sua história aqui. Não há tamanho mínimo ou máximo — escreva o quanto precisar." required></textarea>
+                      placeholder="Escreva sua história aqui..." required></textarea>
         </div>
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
