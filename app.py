@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import psycopg2
 import psycopg2.extras
 from datetime import datetime
+import time
 
 app = Flask(__name__)
 app.secret_key = 'jornada_azul_secreta_2024'
@@ -14,8 +15,16 @@ USUARIOS = {
 DATABASE_URL = "postgresql://postgres:Jornada%402024Azul@db.elmssbcalftgfhkelac.supabase.co:5432/postgres"
 
 def get_db():
-    conn = psycopg2.connect(DATABASE_URL)
-    return conn
+    tentativas = 3
+    for i in range(tentativas):
+        try:
+            conn = psycopg2.connect(DATABASE_URL, connect_timeout=10)
+            return conn
+        except Exception as e:
+            if i < tentativas - 1:
+                time.sleep(2)
+            else:
+                raise e
 
 def init_db():
     conn = get_db()
