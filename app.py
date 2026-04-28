@@ -12,7 +12,7 @@ USUARIOS = {
     'Sirius': '08012021tsa'
 }
 
-DATABASE_URL = "postgresql://postgres:Jornada%402024Azul@db.elmssbcalftgfhkelac.supabase.co:5432/postgres"
+DATABASE_URL = "postgresql://postgres.elmssbclalftgfhkelac:Jornada%402024Azul@aws-1-us-west-2.pooler.supabase.com:5432/postgres"
 
 def get_db():
     tentativas = 3
