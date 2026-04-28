@@ -70,7 +70,7 @@ def init_db():
     cursor.close()
     conn.close()
 
-init_db()
+# init_db() - tabelas ja criadas no Supabase
 
 def admin_logado():
     return 'usuario' in session
