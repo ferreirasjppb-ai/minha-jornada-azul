@@ -11,7 +11,7 @@ USUARIOS = {
     'Sirius': '08012021tsa'
 }
 
-DATABASE_URL = "postgresql://postgres:Jornada@2024Azul@db.elmssbcalftgfhkelac.supabase.co:5432/postgres"
+DATABASE_URL = "postgresql://postgres:Jornada%402024Azul@db.elmssbcalftgfhkelac.supabase.co:5432/postgres"
 
 def get_db():
     conn = psycopg2.connect(DATABASE_URL)
